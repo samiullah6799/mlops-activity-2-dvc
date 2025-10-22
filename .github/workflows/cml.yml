@@ -1,0 +1,38 @@
+# File: .github/workflows/cml.yaml
+name: Model Training Report
+on: [push]
+jobs:
+  train-and-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: iterative/setup-dvc@v1  # Install DVC
+      - uses: iterative/setup-cml@v2  # Install CML
+
+      - name: Setup Remote and Pull Data
+        run: |
+          # Re-add the local remote path (adjust if using cloud storage)
+          dvc remote add -d local_remote dvc-storage
+          dvc pull
+
+      - name: Run Training Pipeline
+        run: dvc repro
+
+      - name: Create CML Report
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 1. Start the markdown report
+          echo "## Model Experiment Report" > report.md
+          
+          # 2. Add metrics from V2
+          echo "### Metrics (New Version)" >> report.md
+          cat metrics.txt >> report.md
+          
+          # 3. Add metrics difference compared to V1 (main branch)
+          echo "### Metrics Difference (New vs Main)" >> report.md
+          git fetch --depth=1 origin main:main
+          dvc metrics diff --show-md main >> report.md
+          
+          # 4. Post the report as a comment on the PR
+          cml comment create report.md
