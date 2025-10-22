@@ -1,0 +1,10 @@
+stages:
+  train:
+    cmd: python3 train.py
+    deps:
+      - data/dataset.csv
+      - train.py
+    outs:
+      - model.pkl
+    metrics:
+      - metrics.txt
