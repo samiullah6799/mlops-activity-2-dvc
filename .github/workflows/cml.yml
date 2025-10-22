@@ -12,7 +12,6 @@ jobs:
       - name: Setup Remote and Pull Data
         run: |
           # Re-add the local remote path (adjust if using cloud storage)
-          dvc remote add -d local_remote dvc-storage
           dvc pull
 
       - name: Run Training Pipeline
