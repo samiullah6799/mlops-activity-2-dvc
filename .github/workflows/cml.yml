@@ -9,11 +9,6 @@ jobs:
       - uses: iterative/setup-dvc@v1  # Install DVC
       - uses: iterative/setup-cml@v2  # Install CML
 
-      - name: Setup Remote and Pull Data
-        run: |
-          # Re-add the local remote path (adjust if using cloud storage)
-          dvc pull
-
       - name: Run Training Pipeline
         run: dvc repro
 
