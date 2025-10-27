@@ -24,9 +24,9 @@ jobs:
           cat metrics.txt >> report.md
           
           # 3. Add metrics difference compared to V1 (main branch)
-          echo "### Metrics Difference (New vs Main)" >> report.md
-          git fetch --depth=1 origin main:main
-          dvc metrics diff --show-md main >> report.md
+          echo "### Metrics Difference (New vs dev)" >> report.md
+          git fetch --depth=1 origin dev:dev
+          dvc metrics diff --show-md dev >> report.md
           
           # 4. Post the report as a comment on the PR
           cml comment create report.md
