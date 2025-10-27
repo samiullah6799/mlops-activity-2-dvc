@@ -4,6 +4,9 @@ on: [push]
 jobs:
   train-and-report:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed for CML to push plots/images/files if you use them
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: iterative/setup-dvc@v2 # Install DVC
