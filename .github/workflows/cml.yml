@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: iterative/setup-dvc@v1 # Install DVC
+      - uses: iterative/setup-dvc@v2 # Install DVC
       - uses: iterative/setup-cml@v2 # Install CML
 
       - name: Setup remote and pull data
