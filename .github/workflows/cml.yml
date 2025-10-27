@@ -6,8 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: iterative/setup-dvc@v1  # Install DVC
-      - uses: iterative/setup-cml@v2  # Install CML
+      - uses: iterative/setup-dvc@v1 # Install DVC
+      - uses: iterative/setup-cml@v2 # Install CML
+
+      - name: Setup remote and pull data
+        run: dvc pull
 
       - name: Run Training Pipeline
         run: dvc repro
@@ -18,15 +21,15 @@ jobs:
         run: |
           # 1. Start the markdown report
           echo "## Model Experiment Report" > report.md
-          
+
           # 2. Add metrics from V2
           echo "### Metrics (New Version)" >> report.md
           cat metrics.txt >> report.md
-          
+
           # 3. Add metrics difference compared to V1 (main branch)
           echo "### Metrics Difference (New vs dev)" >> report.md
           git fetch --depth=1 origin dev:dev
           dvc metrics diff --show-md dev >> report.md
-          
+
           # 4. Post the report as a comment on the PR
           cml comment create report.md
