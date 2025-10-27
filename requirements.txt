@@ -106,5 +106,5 @@ wcwidth==0.2.14
 yarl==1.22.0
 zc.lockfile==4.0
 pandas
-sklearn
+scikit-learn
 joblib
