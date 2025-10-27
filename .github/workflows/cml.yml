@@ -10,7 +10,7 @@ jobs:
       - uses: iterative/setup-cml@v2 # Install CML
 
       - name: Setup remote and pull data
-        run: dvc pull
+        run: dvc pull --force
 
       - name: Run Training Pipeline
         run: dvc repro
