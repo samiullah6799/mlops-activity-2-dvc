@@ -5,8 +5,8 @@ stages:
     deps:
     - path: data/dataset.csv
       hash: md5
-      md5: 08710c0e53149074d5b97cf1867a6849
-      size: 46
+      md5: 117ae55a0b397428272fa60538fffe57
+      size: 61
     - path: train.py
       hash: md5
       md5: 6ebdfc1bda6c9646ad4453d8339a7803
@@ -18,5 +18,5 @@ stages:
       size: 17
     - path: model.pkl
       hash: md5
-      md5: d60cbda38d0daedc5e50aa7945de89fa
+      md5: 5234b362d7e20f0a25fa4545f508be39
       size: 1135
