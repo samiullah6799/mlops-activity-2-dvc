@@ -1,4 +1,6 @@
 stages:
+  install:
+    cmd: pip3 install -r requirements.txt
   train:
     cmd: python3 train.py
     deps:
