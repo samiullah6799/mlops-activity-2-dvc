@@ -28,12 +28,15 @@ jobs:
           # 2. Add metrics from V2
           echo "### Metrics (New Version)" >> report.md
           cat metrics.txt >> report.md
-          cat accuracy_chart.png >> report.md
 
           # 3. Add metrics difference compared to V1 (main branch)
           echo "### Metrics Difference (New vs dev)" >> report.md
           git fetch --depth=1 origin dev:tmp_dev_branch
           dvc metrics diff --md tmp_dev_branch >> report.md
+
+          #4 Add PNG into Report.md
+          echo "### Accuracy Chart " >> report.md
+          cml publish accuracy_chart.png --md >> report.md
 
           # 4. Post the report as a comment on the PR
           cml comment create report.md
