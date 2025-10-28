@@ -28,6 +28,7 @@ jobs:
           # 2. Add metrics from V2
           echo "### Metrics (New Version)" >> report.md
           cat metrics.txt >> report.md
+          cat accuracy_chart.png >> report.md
 
           # 3. Add metrics difference compared to V1 (main branch)
           echo "### Metrics Difference (New vs dev)" >> report.md

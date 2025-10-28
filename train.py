@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 import joblib # for saving the model
+import matplotlib.pyplot as plt
 
 # --- 1. Load Data ---
 try:
@@ -28,7 +29,18 @@ accuracy = accuracy_score(y, y_pred)
 with open('metrics.txt', 'w') as f:
     f.write(f"accuracy: {accuracy:.4f}\n")
 
+
 # Save the model
 joblib.dump(model, 'model.pkl')
+
+plt.figure(figsize=(6, 4))
+plt.bar(['Accuracy'], [accuracy], color='skyblue')
+plt.ylim(0, 1) # Set Y-axis limit from 0 to 1 for accuracy
+plt.title('Model Accuracy')
+plt.ylabel('Accuracy Score')
+# Add the score text on the bar
+plt.text(0, accuracy + 0.02, f'{accuracy:.4f}', ha='center') 
+plt.savefig('accuracy_chart.png') # 💡 Saves the visualization as a PNG file
+plt.close() # Close the figure to free up memory
 
 print(f"Model trained and saved. Accuracy: {accuracy:.4f}")
